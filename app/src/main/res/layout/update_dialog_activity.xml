@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="#FF000000"
+    >
+
+    <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="1dp"
+        android:background="#3E3E3E"
+        android:orientation="vertical"
+        android:weightSum="1"
+        >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="25dp"
+            android:scaleType="fitXY"
+            android:layout_weight="0.3"
+            android:src="@drawable/update_dialogimage" />
+
+        <TextView
+            android:id="@+id/update_text"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="20dip"
+            android:text="Critical version update available!
+Update NOW to continue using."
+            android:textSize="16sp"
+            android:layout_weight="0.6"
+            />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:gravity="center_vertical"
+            android:layout_weight="0.1"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="30dp"
+            >
+
+            <Button
+                android:id="@+id/update_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/roundedbutton"
+                android:onClick="LaunchApp"
+                android:paddingBottom="6dp"
+                android:paddingLeft="26dp"
+                android:paddingRight="26dp"
+                android:paddingTop="6dp"
+                android:text="Install The Update"
+                android:textSize="18sp"
+
+
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:onClick="IgnoraApp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/closebutton" />
+
+</RelativeLayout>

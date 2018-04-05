@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.0"
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "bdtube.vumobile.com.bdtube"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 27
+        versionName "2.25"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/android.arch.lifecycle_runtime.version'
+        exclude 'META-INF/com.android.support_support-v4.version'
+        exclude 'META-INF/com.android.support_support-core-utils.version'
+        exclude 'META-INF/com.android.support_support-core-ui.version'
+        exclude 'META-INF/com.android.support_support-media-compat.version'
+        exclude 'META-INF/com.android.support_support-compat.version'
+        exclude 'META-INF/com.android.support_support-fragment.version'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // compile 'com.google.android.gms:play-services:+'
+    // compile 'com.google.android.gms:play-services-gcm:7.5.0'
+    //compile 'com.google.android.gms:play-services-location:7.5.0'
+    // compile files('libs/gcm.jar')
+    /// compile files('libs/google-play-services_lib.jar')
+    compile project(':pullToRefreshLibrary')
+    compile files('libs/ksoap2-android-assembly-2.5.8-jar-with-dependencies.jar')
+    compile files('libs/adplaybind.jar')
+    compile files('libs/FlurryAnalytics-6.2.0.jar')
+    compile 'com.android.support:appcompat-v7:27.1.0'
+    compile 'com.android.support:animated-vector-drawable:27.1.0'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+    compile('com.longtailvideo.jwplayer:jwplayer-core:+') {
+        exclude module: 'appcompat-v7'
+        exclude module: 'play-services-ads'
+    }
+    compile('com.longtailvideo.jwplayer:jwplayer-common:+') {
+        exclude module: 'appcompat-v7'
+        exclude module: 'play-services-ads'
+    }
+    compile('com.longtailvideo.jwplayer:jwplayer-ima:+') {
+        exclude module: 'appcompat-v7'
+        exclude module: 'play-services-ads'
+    }
+//    compile 'com.github.AdPLayAD:adplay:1.0.9'
+    compile 'com.android.support:design:27.1.0'
+    compile 'com.android.support:recyclerview-v7:27.1.0'
+    compile 'com.android.support:cardview-v7:27.1.0'
+    compile 'com.android.support:support-v4:27.1.0'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.github.AdPLayAD:adplay:2.1.6'
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile 'com.orhanobut:logger:2.1.1'
+
+    compile 'com.google.android.gms:play-services-analytics:10.2.4'
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    compile 'com.mindorks.android:prdownloader:0.2.0'
+
+    compile 'com.github.rtoshiro.fullscreenvideoview:fullscreenvideoview:1.1.2'
+}

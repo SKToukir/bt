@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="@drawable/alertstyle"
+    android:padding="20dp" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="71dp"
+            android:layout_height="49dp"
+            android:layout_weight="0.02"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txtSuggestionLebel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="10dp"
+            android:text="সার্ভিসটির নিবন্ধন নিশ্চিত করতে \n নিচের বাটনটি আবার চাপুন"
+            android:textColor="#000000" />
+
+        <Button
+            android:background="@drawable/round_button"
+            android:id="@+id/btnOk"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="নিশ্চিত"
+            android:textStyle="bold"
+            android:textColor="#fff" />
+
+    </LinearLayout>
+
+</RelativeLayout>

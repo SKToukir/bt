@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="terms">Tap Agree and Continue to accept the BdTube Terms of <a href="https://docs.google.com/document/d/1P7Va5sjDY3VK7XhmBTVMaEjpAVDonUocivz3dctknzs/edit">Service and privacy policy.</a></string>
+    <string name="app_name">BDTube</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_list">List</string>
+    <string name="action_search">Search</string>
+    <string name="title_activity_launcher">launcher</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_bdtube_video_view">BDTubeVideoViewActivity</string>
+    <string name="subscrib_text_Banglalink">BD Tube is a video streaming service for Banglalink users.
+Subscribers will get to watch 5 FREE videos everyday and view unlimited videos on demand.\r\n\r\n
+
+To activate BdTube click <font fgcolor="#ffff0000">"Confirm"</font>  button below!\r\n\r\n
+You will be charged TK2(+SD&amp;VAT)/Daily with Auto-renewal. \r\n\r\n
+
+To deactivate type STOP bdtube and send SMS to 6624.</string>
+    <string name="subscrib_text_Grameenphone">BD Tube is a video streaming service for Grameenphone users.
+Subscribers will get to watch 5 FREE videos everyday and view unlimited videos on demand.\r\n\r\n
+
+To activate BdTube click <font fgcolor="#ffff0000">"Confirm"</font> button below!\r\n\r\n
+You will be charged TK2(+SD&amp;VAT)/Daily with Auto-renewal.\r\n\r\n
+
+To deactivate type STOP bdtube and send SMS to 6624.</string>
+    <string name="subscrib_text_Teletalk">BD Tube is a video streaming service for Teletalk users.
+Subscribers will get to watch 5 FREE videos everyday and view unlimited videos on demand.\r\n\r\n
+
+To activate BdTube click <font fgcolor="#ffff0000">"Confirm"</font> button below!\r\n\r\n
+You will be charged TK2(+SD&amp;VAT)/Daily with Auto-renewal.\r\n\r\n
+
+To deactivate type STOP bdtube and send SMS to 6624.</string>
+    <string name="subscrib_text_Airtel">BD Tube is a video streaming service for Airtel users.
+Subscribers will get to watch 5 FREE videos everyday and view unlimited videos on demand.\r\n\r\n
+
+To activate BdTube click <font fgcolor="#ffff0000">"Confirm"</font> button below!\r\n\r\n
+You will be charged TK2(+SD&amp;VAT)/Daily with Auto-renewal.\r\n\r\n
+
+To deactivate type STOP bdtube and send SMS to 6624.</string>
+    //
+    <string name="dialog_help"><b> Service Name: </b> BdTube\r\n\r\n <b>Service Type:</b> Video streaming application.\r\n\r\n <b>Charging info:</b>\r\n\r\n
+
+ •   Subscription fee Tk2(+SD &amp; VAT)/Day  with auto-renewal.\r\n\r\n
+ •  Tk2(+SD &amp; VAT)/5 views after assume free daily limits.\r\n\r\n
+ •  Tk20(+SD &amp; VAT)/Full Movie.\r\n\r\n
+ •  Full Movie will not consider under daily free limits &amp; five bundle views against of Tk2(+SD &amp; VAT).\r\n\r\n <b>Service modality:</b>\r\n\r\n
+
+ •  User has to subscribe by Tk2(+SD &amp; VAT) to streaming exclusive videos.\r\n\r\n
+ •  Since its subscription model, daily Tk2(+SD &amp; VAT) will deduct from user’s account, even user do not view their free contents.\r\n\r\n
+ •   This cycle will continue until user deactivates the service because this is an auto-renewal process.\r\n
+\r\n <b>Deactivation:</b> To deactivate type STOP bdtube and send SMS to 6624\r\n\r\n <b>Support:</b>\r\n\r\n <b>Helpline:</b>   8801992303765 \r\n\r\n <b>Support e-mail :</b> support@vumobile.biz\r\n</string>
+    //dialog_faq
+    <string name="dialog_faq"><b>Service Name:</b> BdTube \r\n\r\n <b>Service Type:</b> Video streaming application.\r\n\r\n <b>What is BDTube ?</b>\r\n\r\n
+
+BD Tube is a Video streaming application.\r\n\r\n <b>What is BdTube Portal Address?</b>\r\n\r\n <a href="http://bdtube.mobi"> http://bdtube.mobi </a>\r\n\r\n <b>Why should I subscribe in BD Tube ?</b>\r\n\r\n
+
+From BdTube application.you can enjoy exclusive latest Video.\r\n\r\n <b>How much I have to pay for all these service?</b>\r\n\r\n
+
+ • Daily Charging Taka 2(+SD&amp;VAT) with auto-renewal.\r\n\r\n
+
+ • Daily watch 5 FREE videos.\r\n\r\n <b>Subscription process :</b>\r\n\r\n
+
+  •   To Activate: Type START BDTUBE &amp; send SMS to 6624\r\n\r\n
+  •   To Deactivate: Type STOP BDTUBE &amp; send SMS to 6624\r\n\r\n
+What is the helpline/hotline number for all Operators?\r\n\r\n
+
+8801992303765\r\n\r\n <b>What is the time to get the helpline support?</b>\r\n\r\n
+
+8:00 AM – 8:00 PM\r\n\r\n <b>Is this site providing any email support?</b>\r\n\r\n
+
+Yes\r\n\r\n <b>What is the support email address?</b>\r\n\r\n <b>Support email:</b> support@vumobile.biz \r\n</string>
+    <string name="title_activity_splash2">Splash2</string>
+    <string name="FLurry_SDK_API_KEY">43HCSRKGVFHVJ6JVWK2X</string>
+    <string name="gcm_registered">From GCM: device successfully registered!</string>
+    <string name="gcm_unregistered">From GCM: device successfully unregistered!</string>
+    <string name="gcm_message">From GCM: you got message!</string>
+    <string name="gcm_error">From GCM: error (%1$s).</string>
+    <string name="gcm_recoverable_error">From GCM: recoverable error (%1$s).</string>
+    <string name="gcm_deleted">From GCM: server deleted %1$d pending messages!</string>
+    <string name="server_registering">Trying (attempt %1$d/%2$d) to register device on Demo Server.</string>
+    <string name="server_registered">From Demo Server: successfully added device!</string>
+    <string name="server_unregistered">From Demo Server: successfully removed device!</string>
+    <string name="server_register_error">Could not register device on Demo Server after %1$d attempts.</string>
+    <string name="server_unregister_error">Could not unregister device on Demo Server (%1$s).</string>
+    <string name="options_register">Register</string>
+    <string name="options_unregister">Unregister</string>
+    <string name="title_activity_push_vedio_view">PushVedioView</string>
+    <string name="title_activity_main">MainActivity</string>
+
+</resources>
