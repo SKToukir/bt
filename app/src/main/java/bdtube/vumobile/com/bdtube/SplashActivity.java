@@ -64,13 +64,12 @@ public class SplashActivity extends AppCompatActivity {
         getYear();
 
 
-
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             window.setStatusBarColor(ContextCompat.getColor(SplashActivity.this, R.color.white));
         }
         setContentView(R.layout.activity_splash);
 
-        ImageviewSplash=(ImageView)findViewById(R.id.ImageviewSplash);
+        ImageviewSplash = (ImageView)findViewById(R.id.ImageviewSplash);
         GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(ImageviewSplash);
         Glide.with(SplashActivity.this).load(R.mipmap.splash).into(imageViewTarget);
 

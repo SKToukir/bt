@@ -32,6 +32,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -125,8 +126,9 @@ public class MainActivity extends AppCompatActivity
 
     DrawerLayout drawer;
 
-    MediaPlayer mp = new MediaPlayer();
-    MediaPlayer mpScnd = new MediaPlayer();
+    MediaPlayer mp = null;// = new MediaPlayer();
+
+
     private String auto_play_url = "http://wap.shabox.mobi/CMS/Content/Graphics/FullVideo/D480x320/Keno_Bare_Bare_by_Imran_N_Puja.mp4";
 
     private List<SliderClass> sliderClasses = new ArrayList<>();
@@ -154,7 +156,6 @@ public class MainActivity extends AppCompatActivity
     private FitnessClass fitnessClass;
     private Comedy comedyClass;
 
-    private VideoView videoFirst;
 
     private ProgressDialog progressDialog = null;
 
@@ -183,6 +184,15 @@ public class MainActivity extends AppCompatActivity
     private LinearLayout linear_layout_hdvideo;
     private RelativeLayout adLayout;
     private TextView txtFooter, txtSubscription;
+
+    int firstVideo = 0, scndVideo = 0, thirdVideo = 0;
+
+    int firstVideoStopPosition = 0, secondVideoStopPosition = 0, thirdVideoStopPosition = 0;
+
+    private Rect scrollBound;
+
+    private ImageButton btnVideoFirstVOff, btnVideoFirstVOn, btnVideoScndVOff, btnVideoScndVOn,
+            btnVideoThirdVOff, btnVideoThirdVOn;
 
     @SuppressLint("NewApi")
     @Override
@@ -633,191 +643,323 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        playVideo();
-        //playFirstVideoFromList(videoFirst, auto_play_url);
 
-        final Rect scrollBound = new Rect();
+        playFirstVideo();
+
+        scrollBound = new Rect();
+
         scrollViews.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                // Log.d("VISIBILITYYU", String.valueOf(getVisiblePercent(recycler_view_hd_video)));
+            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+
                 scrollViews.getHitRect(scrollBound);
-                if (videoView.getLocalVisibleRect(scrollBound)) {
-                    // imageView is not within or only partially within the visible window
-                    if (it == 0) {
-                        playVideo();
-                        it++;
-                        Log.d("VISIBILITYY", "VISIBLE");
-                    }
-                } else if (videoViewScnd.getLocalVisibleRect(scrollBound)) {
-                    if (itScnd == 0) {
-                        playScndVideo();
-                        itScnd++;
-                        Log.d("VISIBILITYY", "VISIBLE SCND");
-                    }
-                } else if (videoThird.getLocalVisibleRect(scrollBound)) {
-                    if (itThird == 0) {
-                        playThirdVideo();
-                        itThird++;
-                        // imageView is completely visible
-                        Log.d("VISIBILITYY", "VISIBLE THIRD");
-                    }
-                } else if (!videoView.getLocalVisibleRect(scrollBound)) {
-                    if (it == 1) {
-                        it--;
-                        pauseVideo();
-                        Log.d("VISIBILITYY", "INVISIBLE FIRST");
-                    }
 
+                if (videoView.getLocalVisibleRect(scrollBound)){
+                    if (firstVideo==0){
+                        firstVideo++;
+                        playFirstVideo();
+                        Log.d("Visibilityy","Visible first");
+                    }
+                }else if (!videoView.getLocalVisibleRect(scrollBound)){
+                    if (firstVideo==1){
+                        firstVideo--;
+                        pauseFirstVideo();
+                        Log.d("Visibilityy","Invisible first");
+                    }
+                }
+
+                if (videoViewScnd.getLocalVisibleRect(scrollBound)){
+                    if (scndVideo==0){
+                        scndVideo++;
+                        playSecondVideo();
+                        Log.d("Visibilityy","Visible second");
+                    }
                 }else if (!videoViewScnd.getLocalVisibleRect(scrollBound)){
-                    if (itScnd==1){
-                        itScnd--;
-                        pauseScndVideo();
-                        Log.d("VISIBILITYY", "INVISIBLE SCND");
+                    if (scndVideo==1){
+                        scndVideo--;
+                        pauseSecondVideo();
+                        Log.d("Visibilityy","Invisible second");
                     }
                 }
-//                else if (!videoViewScnd.getLocalVisibleRect(scrollBound)){
-//                    if (itScnd == 1) {
-//                        pauseScndVideo();
-//                        itScnd--;
-//                        // imageView is completely visible
-//                        Log.d("VISIBILITYY", "INVISIBLE SCND");
-//                    }
-//                }else if (!videoThird.getLocalVisibleRect(scrollBound)){
-//                    if (itThird == 1) {
-//                        pauseThirdVideo();
-//                        itThird--;
-//                        // imageView is completely visible
-//                        Log.d("VISIBILITYY", "INVISIBLE SCND");
-//                    }
-//                }
+
+                if (videoThird.getLocalVisibleRect(scrollBound)){
+                    if (thirdVideo==0){
+                        thirdVideo++;
+                        playThirdVideo();
+                        Log.d("Visibilityy","Visible third");
+                    }
+                }else if (!videoThird.getLocalVisibleRect(scrollBound)){
+                    if (thirdVideo==1){
+                        thirdVideo--;
+                        pauseThirdVideo();
+                        Log.d("Visibilityy","Invisible third");
+                    }
                 }
-            });
 
+            }
+        });
 
-//        final Rect scrollBound = new Rect();
-//        scrollViews.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-//            @Override
-//            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                // Log.d("VISIBILITYYU", String.valueOf(getVisiblePercent(recycler_view_hd_video)));
-//                scrollViews.getHitRect(scrollBound);
-//                if (videoView.getLocalVisibleRect(scrollBound)) {
-//                    // imageView is not within or only partially within the visible window
-//                    if (it == 0) {
-//                        playVideo();
-//                        it++;
-//                        itScnd--;
-//                        Log.d("VISIBILITYY", "VISIBLE");
-//                    }
-//                }else if(videoViewScnd.getLocalVisibleRect(scrollBound)){
-//                    if (itScnd == 0){
-//                        pauseVideo();
-//                        playScndVideo();
-//                        itScnd++;
-//                        it--;
-//                        Log.d("VISIBILITYY", "VISIBLE SCND");
-//                    }
-//                }else if (!videoViewScnd.getLocalVisibleRect(scrollBound)){
-//                    if (itScnd == 1) {
-//                        pauseScndVideo();
-//                        itScnd--;
-//                        it++;
-//                        // imageView is completely visible
-//                        Log.d("VISIBILITYY", "INVISIBLE SCND");
-//                    }
-//                }else {
-//                    if (itScnd == 1) {
-//                        pauseScndVideo();
-//                        pauseVideo();
-//                        itScnd--;
-//                        it--;
-//                        // imageView is completely visible
-//                        Log.d("VISIBILITYY", "INVISIBLE SCND");
-//                    }
-//                }
-//            }
-//        });
+        btnVideoScndVOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnVideoScndVOff.setVisibility(View.GONE);
+                btnVideoScndVOn.setVisibility(View.VISIBLE);
+                mp.setVolume(setVolume(), setVolume());
+            }
+        });
 
+        btnVideoScndVOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnVideoScndVOff.setVisibility(View.VISIBLE);
+                btnVideoScndVOn.setVisibility(View.GONE);
+                mp.setVolume(0, 0);
+            }
+        });
 
-        }
+        btnVideoThirdVOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnVideoThirdVOff.setVisibility(View.GONE);
+                btnVideoThirdVOn.setVisibility(View.VISIBLE);
+                mp.setVolume(setVolume(), setVolume());
+            }
+        });
+
+        btnVideoThirdVOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnVideoThirdVOff.setVisibility(View.VISIBLE);
+                btnVideoThirdVOn.setVisibility(View.GONE);
+                mp.setVolume(0, 0);
+            }
+        });
+
+        btnVideoFirstVOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnVideoFirstVOff.setVisibility(View.GONE);
+                btnVideoFirstVOn.setVisibility(View.VISIBLE);
+                mp.setVolume(setVolume(), setVolume());
+            }
+        });
+
+        btnVideoFirstVOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnVideoFirstVOff.setVisibility(View.VISIBLE);
+                btnVideoFirstVOn.setVisibility(View.GONE);
+                mp.setVolume(0, 0);
+            }
+        });
+
+        videoView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                SliderClass sliderClass = sliderClasses.get(0);
+                SubcriptionClass.ContentCategoryCode = sliderClass.getContentCategoryCode();
+                SubcriptionClass.ContentCode = sliderClass.getContentCode();
+                SubcriptionClass.ContentTitle = sliderClass.getContentTitle();
+                SubcriptionClass.ContentType = sliderClass.getContentType();
+                SubcriptionClass.physicalFileName = sliderClass.getPhysicalFileName();
+                SubcriptionClass.artist = sliderClass.getArtist();
+                SubcriptionClass.ContentZedCode = sliderClass.getContentZedCode();
+                SubcriptionClass.totalLike = sliderClass.getTotalLike();
+                SubcriptionClass.totalView = sliderClass.getTotalView();
+                SubcriptionClass.imgUrl = sliderClass.getImageUrl();
+                SubcriptionClass.duration = sliderClass.getDuration();
+                SubcriptionClass.info = sliderClass.getInfo();
+                SubcriptionClass.genre = sliderClass.getGenre();
+                SubcriptionClass.relatedContentUrl = Config.URL_NEW_VIDEO;
+                SubcriptionClass.relatedCatCode = "NV";
+                new SubcriptionClass(MainActivity.this).checkSubscription();
+                return false;
+            }
+        });
+
+        videoViewScnd.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                SliderClass sliderClass = sliderClasses.get(1);
+                SubcriptionClass.ContentCategoryCode = sliderClass.getContentCategoryCode();
+                SubcriptionClass.ContentCode = sliderClass.getContentCode();
+                SubcriptionClass.ContentTitle = sliderClass.getContentTitle();
+                SubcriptionClass.ContentType = sliderClass.getContentType();
+                SubcriptionClass.physicalFileName = sliderClass.getPhysicalFileName();
+                SubcriptionClass.artist = sliderClass.getArtist();
+                SubcriptionClass.ContentZedCode = sliderClass.getContentZedCode();
+                SubcriptionClass.totalLike = sliderClass.getTotalLike();
+                SubcriptionClass.totalView = sliderClass.getTotalView();
+                SubcriptionClass.imgUrl = sliderClass.getImageUrl();
+                SubcriptionClass.duration = sliderClass.getDuration();
+                SubcriptionClass.info = sliderClass.getInfo();
+                SubcriptionClass.genre = sliderClass.getGenre();
+                SubcriptionClass.relatedContentUrl = Config.URL_NEW_VIDEO;
+                SubcriptionClass.relatedCatCode = "NV";
+                new SubcriptionClass(MainActivity.this).checkSubscription();
+                return false;
+            }
+        });
+
+        videoThird.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                SliderClass sliderClass = sliderClasses.get(2);
+                SubcriptionClass.ContentCategoryCode = sliderClass.getContentCategoryCode();
+                SubcriptionClass.ContentCode = sliderClass.getContentCode();
+                SubcriptionClass.ContentTitle = sliderClass.getContentTitle();
+                SubcriptionClass.ContentType = sliderClass.getContentType();
+                SubcriptionClass.physicalFileName = sliderClass.getPhysicalFileName();
+                SubcriptionClass.artist = sliderClass.getArtist();
+                SubcriptionClass.ContentZedCode = sliderClass.getContentZedCode();
+                SubcriptionClass.totalLike = sliderClass.getTotalLike();
+                SubcriptionClass.totalView = sliderClass.getTotalView();
+                SubcriptionClass.imgUrl = sliderClass.getImageUrl();
+                SubcriptionClass.duration = sliderClass.getDuration();
+                SubcriptionClass.info = sliderClass.getInfo();
+                SubcriptionClass.genre = sliderClass.getGenre();
+                SubcriptionClass.relatedContentUrl = Config.URL_NEW_VIDEO;
+                SubcriptionClass.relatedCatCode = "NV";
+                new SubcriptionClass(MainActivity.this).checkSubscription();
+                return false;
+            }
+        });
+    }
 
     private void pauseThirdVideo() {
 
-        if (videoThird.isPlaying()) {
+        thirdVideoStopPosition = videoThird.getCurrentPosition();
+        if (videoThird.isPlaying()){
             videoThird.pause();
-        } else {
-            videoThird.start();
         }
     }
 
     private void playThirdVideo() {
 
-        Uri uri = Uri.parse("http://wap.shabox.mobi/CMS/Content/Graphics/FullVideo/D480x320/Monta_Amar_By_F_A_Sumon.mp4");
+        String url;
 
-        videoThird.setVideoURI(uri);
+        if (sliderClasses.get(2).getContentType().equalsIgnoreCase("FV")) {
+            String videoURL = "http://wap.shabox.mobi/CMS/Content/Graphics/FullVideo/D480x320/" + sliderClasses.get(2).getPhysicalFileName() + ".mp4";
+            url = videoURL.replaceAll(" ", "%20");
+        } else {
+            String videoURL = "http://wap.shabox.mobi/CMS/Content/Graphics/Video Clips/D480x320/" + sliderClasses.get(2).getPhysicalFileName() + ".mp4";
+            url = videoURL.replaceAll(" ", "%20");
+        }
 
-        videoThird.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                videoThird.start();
-                mediaPlayer.setVolume(0, 0);
-            }
-        });
+
+//        final Uri uri = Uri.parse("android.resource://" + getPackageName() + "/"
+//                + R.raw.one);
+        final Uri uri = Uri.parse(url);
+
+        if (thirdVideoStopPosition==0) {
+
+            videoThird.setVideoURI(uri);
+
+            videoThird.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(final MediaPlayer mediaPlayer) {
+                    mediaPlayer.setVolume(0,0);
+                    mediaPlayer.setLooping(true);
+                    videoThird.start();
+                }
+            });
+        }else {
+            thirdVideoStopPosition = videoThird.getCurrentPosition();
+            videoThird.start();
+        }
 
     }
 
-    private void pauseScndVideo() {
+    private void pauseSecondVideo() {
 
-        if (videoViewScnd.isPlaying()) {
+        secondVideoStopPosition = videoViewScnd.getCurrentPosition();
+        if (videoViewScnd.isPlaying()){
             videoViewScnd.pause();
-        } else {
-            videoViewScnd.start();
         }
     }
 
-    private void playScndVideo() {
+    private void playSecondVideo() {
 
-        Uri uri = Uri.parse("http://wap.shabox.mobi/CMS/Content/Graphics/FullVideo/D480x320/Mon_Vore_Daw_by_Fuad_ft_Mala.mp4");
+        String url;
 
-        videoViewScnd.setVideoURI(uri);
+        if (sliderClasses.get(1).getContentType().equalsIgnoreCase("FV")) {
+            String videoURL = "http://wap.shabox.mobi/CMS/Content/Graphics/FullVideo/D480x320/" + sliderClasses.get(1).getPhysicalFileName() + ".mp4";
+            url = videoURL.replaceAll(" ", "%20");
+        } else {
+            String videoURL = "http://wap.shabox.mobi/CMS/Content/Graphics/Video Clips/D480x320/" + sliderClasses.get(1).getPhysicalFileName() + ".mp4";
+            url = videoURL.replaceAll(" ", "%20");
+        }
 
-        videoViewScnd.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                videoViewScnd.start();
-                //mediaPlayer.setVolume(0, 0);
-            }
-        });
+
+//        final Uri uri = Uri.parse("android.resource://" + getPackageName() + "/"
+//                + R.raw.one);
+        final Uri uri = Uri.parse(url);
+
+        if (secondVideoStopPosition==0) {
+
+            videoViewScnd.setVideoURI(uri);
+
+            videoViewScnd.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.setVolume(0,0);
+                    mediaPlayer.setLooping(true);
+                    videoViewScnd.start();
+                }
+            });
+        }else {
+            secondVideoStopPosition = videoViewScnd.getCurrentPosition();
+            videoViewScnd.start();
+        }
+
+
+
     }
 
-    int it = 0, itScnd = 0, itThird = 0;
+    private void pauseFirstVideo() {
 
-    private void pauseVideo() {
-
-        if (videoView.isPlaying()) {
+        firstVideoStopPosition = videoView.getCurrentPosition();
+        if (videoView.isPlaying()){
             videoView.pause();
+        }
+    }
+
+    private void playFirstVideo() {
+
+
+        String url;
+
+        if (sliderClasses.get(0).getContentType().equalsIgnoreCase("FV")) {
+            String videoURL = "http://wap.shabox.mobi/CMS/Content/Graphics/FullVideo/D480x320/" + sliderClasses.get(0).getPhysicalFileName() + ".mp4";
+            url = videoURL.replaceAll(" ", "%20");
         } else {
+            String videoURL = "http://wap.shabox.mobi/CMS/Content/Graphics/Video Clips/D480x320/" + sliderClasses.get(0).getPhysicalFileName() + ".mp4";
+            url = videoURL.replaceAll(" ", "%20");
+        }
+
+
+//        final Uri uri = Uri.parse("android.resource://" + getPackageName() + "/"
+//                + R.raw.one);
+        final Uri uri = Uri.parse(url);
+
+        if (firstVideoStopPosition==0) {
+
+            videoView.setVideoURI(uri);
+
+            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(final MediaPlayer mediaPlayer) {
+                    mediaPlayer.setVolume(0,0);
+                    mediaPlayer.setLooping(true);
+                    videoView.start();
+                }
+            });
+        }else {
+            firstVideoStopPosition = videoView.getCurrentPosition();
             videoView.start();
         }
     }
 
-    private void playVideo() {
-
-        Uri uri = Uri.parse(auto_play_url);
-
-        videoView.setVideoURI(uri);
-
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                videoView.start();
-                MediaController mediaController = new MediaController(MainActivity.this);
-                mediaController.setAnchorView(videoView);
-                videoView.setMediaController(mediaController);
-
-            }
-        });
-    }
 
 
     public static int getVisiblePercent(View v) {
@@ -1140,9 +1282,29 @@ public class MainActivity extends AppCompatActivity
 
     private void initUI() {
 
+        btnVideoFirstVOff = findViewById(R.id.btnVideoFirstVOff);
+        btnVideoFirstVOn = findViewById(R.id.btnVideoFirstVOn);
+
+        btnVideoThirdVOff = findViewById(R.id.btnVideoThirdVOff);
+        btnVideoThirdVOn = findViewById(R.id.btnVideoThirdVOn);
+
+        btnVideoScndVOff = findViewById(R.id.btnVideoScndVOff);
+        btnVideoScndVOn = findViewById(R.id.btnVideoScndVOn);
+
+        btnVideoFirstVOff.setVisibility(View.GONE);
+        btnVideoFirstVOn.setVisibility(View.GONE);
+        btnVideoThirdVOff.setVisibility(View.GONE);
+        btnVideoThirdVOn.setVisibility(View.GONE);
+        btnVideoScndVOff.setVisibility(View.GONE);
+        btnVideoScndVOn.setVisibility(View.GONE);
+
         videoView = findViewById(R.id.videoView);
         videoViewScnd = findViewById(R.id.videoViewScnd);
         videoThird = findViewById(R.id.videoThird);
+
+        videoView.setBackgroundResource(android.R.color.transparent);
+        videoViewScnd.setBackgroundResource(android.R.color.transparent);
+        videoThird.setBackgroundResource(android.R.color.transparent);
 
         videoView.requestFocus();
 
@@ -2866,5 +3028,29 @@ public class MainActivity extends AppCompatActivity
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //Adding request to the queue
         requestQueue.add(req);
+    }
+
+    private float setVolume(){
+        final int max = 100;
+        final double numerator = max - 100 > 0 ? Math.log(max - 100) : 0;
+        final float volume = (float) (1 - (numerator / Math.log(max)));
+
+        return volume;
+    }
+
+    private float setVolume1(){
+        final int max = 100;
+        final double numerator = max - 100 > 0 ? Math.log(max - 100) : 0;
+        final float volume = (float) (1 - (numerator / Math.log(max)));
+
+        return volume;
+    }
+
+    private float setVolume2(){
+        final int max = 100;
+        final double numerator = max - 100 > 0 ? Math.log(max - 100) : 0;
+        final float volume = (float) (1 - (numerator / Math.log(max)));
+
+        return volume;
     }
 }
